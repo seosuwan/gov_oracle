@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="shop.jarviis.oracle.mappers.BookMapper">
+<insert id="save" parameterType="book">
+insert into books(book_id, book_title, price, pub_id)
+values (${bookId},#{bookTitle},${price},${pubId})
+</insert>
+<select id="findById" parameterType="int" resultType="book">
+select
+    book_id bookId,
+    book_title bookTitle,
+    price,
+    pub_id pubId
+from books
+where book_id = ${bookId}
+</select>
+<select id="findAll" resultType="book">
+select
+    book_id bookId,
+    book_title bookTitle,
+    price,
+    pub_id pubId
+from books
+</select>
+<update id="update" parameterType="book">
+update books set
+    book_title = #{bookTitle},
+    price = ${price} ,
+    pub_id = ${pubId}
+where book_id = ${bookId}
+</update>
+<delete id="delete" parameterType="int">
+delete from books
+	 where book_id = ${bookId}
+</delete>
+</mapper>
+

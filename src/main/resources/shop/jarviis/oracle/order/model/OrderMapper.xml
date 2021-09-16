@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="shop.jarviis.oracle.mappers.OrderMapper">
+
+<update id="update" parameterType="order">
+update orders set
+	order_id = ${orderId},
+	    cust_id = ${customerId},
+	    book_id = ${bookId},
+	    order_price = ${orderPrice},
+	    order_date = #{date}
+    where order_id like ${orderId}
+
+</update>
+<delete id="delete" parameterType="int">
+	delete from orders
+	where order_id like ${orderId}
+</delete>
+<insert id="save" parameterType="order">
+insert into
+orders (order_id, cust_id, book_id, order_price, order_date)
+values(${orderId},${customerId},${bookId},${orderPrice},#{date})
+</insert>
+<select id="findAll" resultType="order">
+select
+    order_id orderId,
+    cust_id customerId,
+    book_id,
+    order_price orderPrice,
+    order_date date
+from orders
+</select>
+<select id="findById" resultType="order" parameterType="int">
+select
+    order_id orderId,
+    cust_id customerId,
+    book_id,
+    order_price orderPrice,
+    order_date date
+from orders
+where order_id = ${orderId}
+</select>
+<select id="findByCustomerId" resultType="order" parameterType="int">
+select
+    order_id orderId,
+    cust_id customerId,
+    book_id,
+    order_price orderPrice,
+    order_date date
+from orders
+where cust_id = ${cust_id}
+</select>
+<select id="findByBookId" resultType="order" parameterType="int">
+select
+    order_id orderId,
+    cust_id customerId,
+    book_id,
+    order_price orderPrice,
+    order_date date
+from orders
+where book_id = ${book_id}
+</select>
+<select id="findByOrderPrice" resultType="order" parameterType="int">
+select
+    order_id orderId,
+    cust_id customerId,
+    book_id,
+    order_price orderPrice,
+    order_date date
+from orders
+where orderPrice = ${orderPrice}
+</select>
+<select id="findByDate" resultType="order" parameterType="string">
+select
+    order_id orderId,
+    cust_id customerId,
+    book_id,
+    order_price orderPrice,
+    order_date date
+from orders
+where date = %${date}%
+</select>
+</mapper>

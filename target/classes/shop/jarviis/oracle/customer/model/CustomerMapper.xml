@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="shop.jarviis.oracle.mappers.CustomerMapper">
+
+<insert id="save" parameterType="customer">
+insert into
+customers (cust_id, cust_name, address, phone)
+values(${customerId},#{customerName},#{address},#{phoneN})
+</insert>
+<select id="findAll" resultType="customer">
+select
+    cust_Id customerId,
+    cust_name customerName,
+    address,
+    phone phoneN
+from customers
+</select>
+<select id="findById" resultType="customer" parameterType="int">
+select
+    cust_Id customerId,
+    cust_name customerName,
+    address,
+    phone phoneN
+from customers
+where customerId = ${customerId}
+</select>
+<select id="findByCustomerName" resultType="customer" parameterType="string">
+select
+    cust_Id customerId,
+    cust_name customerName,
+    address,
+    phone phoneN
+from customers
+where cust_name = #{customerName}
+</select>
+<select id="findByaddress" resultType="customer" parameterType="string">
+select
+    cust_Id customerId,
+    cust_name customerName,
+    address,
+    phone phoneN
+from customers
+where address like '%'||#{value}||'%'
+</select>
+<select id="findByphoneN" resultType="customer" parameterType="string">
+select
+    cust_Id customerId,
+    cust_name customerName,
+    address,
+    phone phoneN
+from customers
+where phone = '%${phoneN}%'
+</select>
+</mapper>
